@@ -1,4 +1,4 @@
-# RustDesk安装脚本
+# RustDesk-Server安装脚本
 
 ## 安装&卸载
 
@@ -31,6 +31,8 @@ wget -N  http://raw.githubusercontent.com/sshpc/rustdesktool/main/rustdesktool.s
 
 ## 其他
 
+官方rep： https://github.com/rustdesk/rustdesk
+
 * 默认安装目录
 /usr/local/rustdesk-sever
 >可在安装脚本里修改
@@ -40,6 +42,8 @@ wget -N  http://raw.githubusercontent.com/sshpc/rustdesktool/main/rustdesktool.s
 /usr/lib/systemd/system/RustDeskHbbr.service
 /usr/lib/systemd/system/RustDeskHbbs.service
 ```
+* 支持国内环境
+镜像支持 https://gitmirror.com/
 
 
 

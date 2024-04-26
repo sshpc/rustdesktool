@@ -3,7 +3,9 @@ export LANG=en_US.UTF-8
 
 #初始化
 initself() {
-    version='1.0'
+    version='1.1'
+    #官方版本号
+    rustdeskserverversion='1.1.10-3'
     installType='yum -y install'
     removeType='yum -y remove'
     upgrade="yum -y update"
@@ -38,9 +40,9 @@ initself() {
     #菜单头部
     menutop() {
         clear
-        _green '# 自建rustdesk sh脚本'
+        _green '# RustDesk-Server 安装脚本'
         _green '# Github <https://github.com/sshpc/rustdesktool>'
-        _blue 'You Server:'${release}
+        _blue '# You Server:'${release}
         echo
         _blue ">~~~~~~~~~~~~~~  rustdesk-server tool ~~~~~~~~~~~~<  v: $version"
         echo
@@ -177,11 +179,36 @@ install() {
     mkdir -p $installdirectory
     ${installType} wget
     ${installType} unzip
-    wget https://github.com/rustdesk/rustdesk-server/releases/download/1.1.10-3/rustdesk-server-linux-amd64.zip -P $installdirectory
+
+    # 下载链接列表#兼容国内环境
+    links=(
+        "https://gh.ddlc.top/https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
+         "https://ghproxy.com/https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip" 
+        "https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
+    )
+
+    # 设置超时时间（秒）
+    timeout=7
+
+    # 遍历链接列表
+    for link in "${links[@]}"; do
+        echo "正在尝试下载：$link"
+
+        # 使用 wget 下载文件，并设置超时时间
+        wget --timeout="$timeout" "$link" -P $installdirectory
+
+        # 检查 wget 的退出状态
+        if [ $? -eq 0 ]; then
+            echo "下载成功：$link"
+            break # 下载成功，跳出循环
+        else
+            _yellow "下载失败，继续尝试下一个镜像链接"
+        fi
+    done
 
     if [ ! -f "$installdirectory/rustdesk-server-linux-amd64.zip" ]; then
 
-        _red "下载失败,请重试"
+        _red "尝试全部链接下载失败,请检查"
     fi
     unzip $installdirectory/rustdesk-server-linux-amd64.zip -d $installdirectory
 
@@ -260,17 +287,10 @@ EOF
 viewstatus() {
     echo
     _blue 'RustDeskHbbs status:'
-    echo
-    systemctl status RustDeskHbbs
+    systemctl status RustDeskHbbs | awk '/Active/'
     echo
     _blue 'RustDeskHbbr status:'
-    echo
-    systemctl status RustDeskHbbr
-
-    echo
-    _blue 'installfile status:'
-    echo
-    ls -l $installdirectory
+    systemctl status RustDeskHbbr | awk '/Active/'
     echo
     _blue 'net status:'
     echo
