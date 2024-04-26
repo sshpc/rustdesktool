@@ -1,0 +1,2 @@
+# rustdesktool
+rustdeskinstall shell
