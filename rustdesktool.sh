@@ -3,7 +3,7 @@ export LANG=en_US.UTF-8
 
 #初始化
 initself() {
-    version='1.1'
+    version='1.1.1'
     #官方版本号
     rustdeskserverversion='1.1.10-3'
     installType='yum -y install'
@@ -297,11 +297,19 @@ viewstatus() {
     netstat -tuln | grep -E ":(21115|21116|21117|21118|21119)\b"
 }
 
+viewkey(){
+    echo
+     _blue '公钥:'
+    cat $installdirectory/id_ed25519.pub
+    echo
+    echo
+}
+
 #主函数
 main() {
 
     menuname='首页'
-    options=("安装" install "卸载" uninstall "查看状态" viewstatus "升级脚本" updateself)
+    options=("安装" install "卸载" uninstall "查看状态" viewstatus "查看key" viewkey "升级脚本" updateself)
     menu "${options[@]}"
 }
 
