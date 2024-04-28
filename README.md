@@ -32,7 +32,9 @@ wget -N  http://raw.githubusercontent.com/sshpc/rustdesktool/main/rustdesktool.s
 * API服务器地址：留空
 * 秘钥：粘贴你的服务器公钥
 
->若连接失败,请检查防火墙端口是否打开 TCP&UDP 端口 21115-21119
+>若连接失败,请检查防火墙端口是否打开 
+
+hbbs 监听21115(tcp), 21116(tcp/udp), 21118(tcp)，hbbr 监听21117(tcp), 21119(tcp)。21115是hbbs用作NAT类型测试，21116/UDP是hbbs用作ID注册与心跳服务，21116/TCP是hbbs用作TCP打洞与连接服务，21117是hbbr用作中继服务, 21118和21119是为了支持网页客户端。如果不需要网页客户端可以不开。
 
 
 ## 其他

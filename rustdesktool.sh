@@ -3,7 +3,7 @@ export LANG=en_US.UTF-8
 
 #初始化
 initself() {
-    version='1.1.1'
+    version='1.2'
     #官方版本号
     rustdeskserverversion='1.1.10-3'
     installType='yum -y install'
@@ -273,7 +273,7 @@ After=network.target
 User=root
 Type=simple
 WorkingDirectory=$installdirectory
-ExecStart=$installdirectory/hbbr
+ExecStart=$installdirectory/hbbr -k _
 ExecStop=/bin/kill -TERM \$MAINPID
 
 [Install]
@@ -294,7 +294,7 @@ After=network.target
 User=root
 Type=simple
 WorkingDirectory=$installdirectory
-ExecStart=$installdirectory/hbbs
+ExecStart=$installdirectory/hbbs -k _
 ExecStop=/bin/kill -TERM \$MAINPID
 
 [Install]
