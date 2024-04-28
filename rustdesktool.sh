@@ -149,10 +149,49 @@ updateself() {
 
 }
 
-#卸载
-uninstall() {
+#查看状态
+viewstatus() {
+    echo
+    _blue 'RustDeskHbbs status:'
+    systemctl status RustDeskHbbs | awk '/Active/'
+    echo
+    _blue 'RustDeskHbbr status:'
+    systemctl status RustDeskHbbr | awk '/Active/'
+    echo
+    _blue 'net status:'
+    echo
+    netstat -tuln | grep -E ":(21115|21116|21117|21118|21119)\b"
+}
+
+startservice() {
+    _blue "启动服务"
+
+    systemctl start RustDeskHbbs
+    systemctl start RustDeskHbbr
+
+    viewstatus
+}
+
+stopservice() {
+    _blue "停止服务"
+
     systemctl stop RustDeskHbbs
     systemctl stop RustDeskHbbr
+
+    viewstatus
+}
+
+viewkey() {
+    echo
+    _blue '公钥:'
+    cat $installdirectory/id_ed25519.pub
+    echo
+    echo
+}
+
+#卸载
+uninstall() {
+    stopservice
 
     systemctl disable RustDeskHbbs
     systemctl disable RustDeskHbbr
@@ -183,7 +222,7 @@ install() {
     # 下载链接列表#兼容国内环境
     links=(
         "https://gh.ddlc.top/https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
-         "https://ghproxy.com/https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip" 
+        "https://ghproxy.com/https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
         "https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
     )
 
@@ -267,49 +306,28 @@ EOF
     systemctl enable RustDeskHbbr
     echo
 
-    _blue "启动服务"
-
-    systemctl start RustDeskHbbs
-    systemctl start RustDeskHbbr
+    #启动服务
+    startservice
 
     clear
     _green '安装成功'
-    echo
-    _blue '公钥:'
-    cat $installdirectory/id_ed25519.pub
-    echo
+    viewkey
+
+    local ip="$(wget -q -T10 -O- ipinfo.io/ip)"
+    _green '公网 IP:'
+    echo $ip
     echo
     _yellow "请手动放行防火墙 TCP & UDP端口 21115-21119"
     echo
 
 }
-#查看状态
-viewstatus() {
-    echo
-    _blue 'RustDeskHbbs status:'
-    systemctl status RustDeskHbbs | awk '/Active/'
-    echo
-    _blue 'RustDeskHbbr status:'
-    systemctl status RustDeskHbbr | awk '/Active/'
-    echo
-    _blue 'net status:'
-    echo
-    netstat -tuln | grep -E ":(21115|21116|21117|21118|21119)\b"
-}
 
-viewkey(){
-    echo
-     _blue '公钥:'
-    cat $installdirectory/id_ed25519.pub
-    echo
-    echo
-}
 
 #主函数
 main() {
 
     menuname='首页'
-    options=("安装" install "卸载" uninstall "查看状态" viewstatus "查看key" viewkey "升级脚本" updateself)
+    options=("安装" install "卸载" uninstall "查看状态" viewstatus "查看key" viewkey "启动服务" startservice "停止服务" stopservice "升级脚本" updateself)
     menu "${options[@]}"
 }
 
