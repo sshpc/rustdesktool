@@ -3,7 +3,7 @@ export LANG=en_US.UTF-8
 
 #初始化
 initself() {
-    version='1.2'
+    version='1.2.1'
     #官方版本号
     rustdeskserverversion='1.1.10-3'
     installType='yum -y install'

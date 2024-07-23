@@ -51,7 +51,7 @@ hbbs 监听21115(tcp), 21116(tcp/udp), 21118(tcp)，hbbr 监听21117(tcp), 21119
 /usr/lib/systemd/system/RustDeskHbbs.service
 ```
 * 支持国内环境
-镜像支持 https://gitmirror.com/
+镜像支持: https://gitmirror.com/
 
 
 
