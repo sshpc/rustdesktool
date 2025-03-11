@@ -3,9 +3,9 @@ export LANG=en_US.UTF-8
 
 #初始化
 initself() {
-    version='1.2.1'
+    version='1.2.2'
     #官方版本号
-    rustdeskserverversion='1.1.10-3'
+    rustdeskserverversion='1.1.14'
     installType='yum -y install'
     removeType='yum -y remove'
     upgrade="yum -y update"
@@ -229,25 +229,26 @@ install() {
     # 设置超时时间（秒）
     timeout=7
 
-    # 遍历链接列表
+    # 优化下载逻辑，添加重试机制
+    max_retries=3
     for link in "${links[@]}"; do
-        echo "正在尝试下载：$link"
-
-        # 使用 wget 下载文件，并设置超时时间
-        wget --timeout="$timeout" "$link" -P $installdirectory
-
-        # 检查 wget 的退出状态
-        if [ $? -eq 0 ]; then
-            echo "下载成功：$link"
-            break # 下载成功，跳出循环
-        else
-            _yellow "下载失败，继续尝试下一个镜像链接"
-        fi
+        retries=0
+        while [ $retries -lt $max_retries ]; do
+            echo "正在尝试下载：$link (重试 $((retries + 1)) 次)"
+            wget --timeout="$timeout" "$link" -P $installdirectory
+            if [ $? -eq 0 ]; then
+                echo "下载成功：$link"
+                break 2
+            fi
+            retries=$((retries + 1))
+            sleep 2
+        done
+        _yellow "下载失败，继续尝试下一个镜像链接"
     done
-
+    # 优化错误处理，添加更多详细信息
     if [ ! -f "$installdirectory/rustdesk-server-linux-amd64.zip" ]; then
-
-        _red "尝试全部链接下载失败,请检查"
+        _red "尝试全部链接下载失败，请检查网络连接或镜像地址：${links[@]}"
+        exit 1
     fi
     unzip $installdirectory/rustdesk-server-linux-amd64.zip -d $installdirectory
 
