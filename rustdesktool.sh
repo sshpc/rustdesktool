@@ -3,7 +3,7 @@ export LANG=en_US.UTF-8
 
 #初始化
 initself() {
-    version='1.2.2'
+    version='1.2.3'
     #官方版本号
     rustdeskserverversion='1.1.14'
     installType='yum -y install'
@@ -222,7 +222,7 @@ install() {
     # 下载链接列表#兼容国内环境
     links=(
         "https://gh.ddlc.top/https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
-        "https://ghproxy.com/https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
+        "https://git.886.be/https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
         "https://github.com/rustdesk/rustdesk-server/releases/download/$rustdeskserverversion/rustdesk-server-linux-amd64.zip"
     )
 
