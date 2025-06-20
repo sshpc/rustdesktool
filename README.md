@@ -1,4 +1,28 @@
-# RustDesk-Server安装脚本
+# RustDesk-Server 一键安装脚本
+
+## 示例
+```sh
+# RustDesk-Server 安装脚本
+# Github <https://github.com/sshpc/rustdesktool>
+# You Server:ubuntu
+
+>~~~~~~~~~~~~~~  rustdesk-server tool ~~~~~~~~~~~~<  v: 1.0
+
+当前菜单: 首页 
+
+1: 安装            2: 卸载
+
+3: 查看状态          4: 查看key
+
+5: 启动服务          6: 停止服务
+
+7: 升级脚本          
+
+
+q: 退出  
+
+请输入命令号: 
+```
 
 ## 安装&卸载
 
@@ -16,24 +40,26 @@ wget -N  http://raw.githubusercontent.com/sshpc/rustdesktool/main/rustdesktool.s
 ```
 
 ## 客户端下载
-rustdesk官方 支持 (Windows、Ubuntu、Mac、Android..) 
-
+官方地址 
 https://rustdesk.com/download
+
+支持 (Windows、Ubuntu、Mac、Android..) 
 
 ## 客户端配置
 
 >默认安装后使用的是官方的服务器，需要换成自己的
 
-客户端 设置-网络 (window 解锁安全设置)：
+ 设置 → 网络
 * ID服务器地址：<你的服务器IP>
 * 中继服务器地址：<你的服务器IP>
 * API服务器地址：留空
-* 秘钥：你的服务器公钥（安装后获取）
-
-> 默认安装目录下的 id_ed25519.pub
+* 秘钥：你的服务器公钥（脚本执行完输出）
 
 
-## 其他
+## 其他信息
+
+### 秘钥位置
+默认安装目录下的 id_ed25519.pub
 
 ### 端口
 
@@ -51,10 +77,6 @@ hbbr 监听21117(tcp), 21119(tcp)
 21118和21119是为了支持网页客户端。如果不需要网页客户端可以不开。
 
 
-### 官方 rep： 
-
-https://github.com/rustdesk/rustdesk
-https://github.com/rustdesk/rustdesk-server
 
 ### 默认安装目录
 /usr/local/rustdesk-sever
@@ -67,6 +89,11 @@ https://github.com/rustdesk/rustdesk-server
 ### 支持国内环境
 
 镜像支持: https://gitmirror.com/
+
+### 官方 rep： 
+
+https://github.com/rustdesk/rustdesk-server
+
 
 
 

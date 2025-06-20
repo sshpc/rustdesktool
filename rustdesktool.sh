@@ -40,7 +40,7 @@ initself() {
     #菜单头部
     menutop() {
         clear
-        _green '# RustDesk-Server 安装脚本'
+        _green '# RustDesk-Server 一键安装脚本'
         _green '# Github <https://github.com/sshpc/rustdesktool>'
         _blue '# You Server:'${release}
         echo
