@@ -2,11 +2,11 @@
 
 ## 示例
 ```sh
-# RustDesk-Server 安装脚本
+# RustDesk-Server x86 安装脚本
 # Github <https://github.com/sshpc/rustdesktool>
 # You Server:ubuntu
 
->~~~~~~~~~~~~~~  rustdesk-server tool ~~~~~~~~~~~~<  v: 1.0
+>~~~~~~~~~~~~~~  rustdesk-server tool ~~~~~~~~~~~~<  v: 1.3
 
 当前菜单: 首页 
 
@@ -53,13 +53,15 @@ https://rustdesk.com/download
 * ID服务器地址：<你的服务器IP>
 * 中继服务器地址：<你的服务器IP>
 * API服务器地址：留空
-* 秘钥：你的服务器公钥（脚本执行完输出）
+* 秘钥：你的服务器公钥（安装后获得）
 
 
 ## 其他信息
 
 ### 秘钥位置
 默认安装目录下的 id_ed25519.pub
+
+>自定义秘钥：安装后手动替换 /usr/local/rustdesk-sever 下的 id_ed25519.pub 和 id_ed25519
 
 ### 端口
 
