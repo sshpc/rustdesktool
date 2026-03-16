@@ -5,7 +5,7 @@ export LANG=en_US.UTF-8
 #安装目录
 installdirectory='/usr/local/rustdesk-server'
 #官方版本号
-rustdeskserverversion='1.1.14'
+rustdeskserverversion='1.1.15'
 # 配置文件下载代理主机列表（github加速）
 proxyhost=(
     "https://gh.ddlc.top"
@@ -21,7 +21,6 @@ installType=''
 removeType=''
 upgrade=''
 release='linux'
-version='1.3'
 
 #字体颜色定义
 _red() {
@@ -104,7 +103,7 @@ menu() {
     _blue '# You Server:'${release}
     _blue "服务状态: [$(check_rustdesk_status)]"
     echo
-    _blue ">~~~~~~~~~~~~~~  rustdesk-server tool ~~~~~~~~~~~~<  v: $version"
+    _blue ">~~~~~~~~~~~~~~  rustdesk-server tool ~~~~~~~~~~~~<  v: $rustdeskserverversion"
     echo
     options=("$@")
     num_options=${#options[@]}

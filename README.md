@@ -97,6 +97,15 @@ hbbr 监听21117(tcp), 21119(tcp)
 
 https://github.com/rustdesk/rustdesk-server
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=sshpc%2Frustdesktool&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=sshpc/rustdesktool&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=sshpc/rustdesktool&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=sshpc/rustdesktool&type=date&legend=top-left" />
+ </picture>
+</a>
 
 
 
